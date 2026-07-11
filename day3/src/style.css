@@ -14,10 +14,33 @@ body {
   background: #000;
 }
 
-.box{
-  height: 350px;
-  width: 350px;
+/* .box{
+  height: 50px;
+  width: 50px;
   background-color: blue;
 
   margin-bottom: 1rem;
+} */
+
+#app{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1{
+  font-size: 8rem;
+  line-height: 0.9;
+  font-family: sans-serif;
+  color: red;
+}
+
+span {
+  display: inline-block;
+}
+
+.heading{
+  overflow: hidden;
 }
