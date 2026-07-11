@@ -14,14 +14,39 @@ import './style.css'
 //   repeat : -1
 // })
 
-gsap.from('h1 span',{
-  yPercent : 100,
-  opacity: 0, 
-  duration : 5,
-  ease: 'expo.out',
-  stagger : {
-    each : 0.08,
-    from : 'random'
-  }
-})
 
+//timeline
+
+const tl = gsap.timeline( )
+
+tl.to('.box1',{
+  // yPercent : 100,
+  x : 121,
+  // opacity: 0, 
+  duration : 2,
+  ease: 'power4.out',
+  // stagger : {
+  //   each : 0.08,
+  //   from : 'random'
+  // }
+}).to('.box2', {
+  x : 120,
+  duration : 2,
+  ease : "power4.out",
+  // delay : 1.9
+}).to('.box3', {
+  x : 120,
+  duration : 2,
+  ease : "power4.out",
+  // delay : 1.9
+}).to('.box4', {
+  x : 120,
+  duration : 2,
+  ease : "power4.out",
+  // delay : 1.9
+}).to('.box5', {
+  x : 120,
+  duration : 2,
+  ease : "power4.out",
+  // delay : 1.9
+})
