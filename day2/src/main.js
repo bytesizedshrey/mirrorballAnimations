@@ -3,8 +3,10 @@ import './style.css'
 
 gsap.to('.box',{
   x : 900,
-  duration : 2.6,
+  duration : 1.5,
   delay : 0.6,
-  ease: "expo.in"
+  ease: "sine.in",
+  repeat: 3,
+  yoyo: true
 })
 
