@@ -28,6 +28,10 @@ gsap.to('.box',{
 
   onComplete : () => {
     console.log('animation has been completed...')
+  },
+
+  onUpdate : ()=>{
+    console.log('animation has been updated...')
   }
 })
 
