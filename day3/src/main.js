@@ -34,7 +34,7 @@ tl.to('.box1',{
   duration : 2,
   ease : "power4.out",
   // delay : 1.9
-}).to('.box3', {
+},"ferrari").to('.box3', {
   x : 120,
   duration : 2,
   ease : "power4.out",
@@ -44,7 +44,7 @@ tl.to('.box1',{
   duration : 2,
   ease : "power4.out",
   // delay : 1.9
-}).to('.box5', {
+},"ferrari+=0.2",).to('.box5', {
   x : 120,
   duration : 2,
   ease : "power4.out",
