@@ -11,15 +11,15 @@ html, body {
 
 body {
   font-family: sans-serif;
-  background-color: slategray;
-  color: bisque;
+  background-color: black;
+  color: burlywood;
 }
 
-.box{
+/* .box{
   height: 280px;
   width: 280px;
   background: bisque;
-}
+} */
 
 .page{
   height: 100vh;
@@ -27,5 +27,33 @@ body {
 }
 
 .page2{
+  position: relative;
   background: black;
+}
+
+.imageDiv{
+  height: 100%;
+  width: 100%;
+  transform-origin: center;
+}
+img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.content{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  /* gap: 50rem; */
+}
+.content h1{
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size : 10rem
 }

@@ -5,17 +5,38 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.to('.box',{
-  x : 1200,
+gsap.set('.imageDiv',{
+  scale : 0.3
+})
+
+gsap.set('.content',{
+  gap : '51rem'
+})
+
+const t1 = gsap.timeline({
+  scrollTrigger:{
+    trigger : '.page2',
+    start : "top top",
+    end : "top -100%",
+    scrub : 4,
+    pin : true,
+    // onEnter : () => {},
+    // onLeave : ()=>{},
+    // onUpdate : () => {},
+    // onEnterBack : () => {},
+    // onLeaveBack : () => {}
+    } 
+})
+
+t1.to('.imageDiv',{
+  scale : 1,
+  // x : 1200,
   // duration : 5,
   ease : "power4.out",
-  yoyo : true,
+  // yoyo : true,
   // delay : 1.9,
-  scrollTrigger:{
-  trigger : '.page2',
-  start : "top top",
-  end : "top -40%",
-  scrub : 4,
-  pin : true
-  } 
 })
+// .to(".content",{
+//   gap : "2rem",
+// },"<",
+// )
