@@ -27,6 +27,7 @@ body {
   font-size: 8rem;
   font-weight: 200;
   text-transform: uppercase;
+  line-height: 0.8   ;
 }
 #app .title h1::selection {
   background-color: red;
@@ -35,4 +36,12 @@ body {
 
 span{
   display: inline-block;
+}
+
+p{
+  font-size: 2.3rem;
+  width: 80%;
+}
+.titleWord, .titleChars{
+  overflow: hidden;
 }
