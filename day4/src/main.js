@@ -14,61 +14,76 @@ import './style.css'
 //   repeat : -1
 // })
 
-const play = document.querySelector('.play')
-const pause = document.querySelector('.pause')
-const restart = document.querySelector('.restart')
-const reverse = document.querySelector('.reverse')
-const seek = document.querySelector('.seek')
+// const play = document.querySelector('.play')
+// const pause = document.querySelector('.pause')
+// const restart = document.querySelector('.restart')
+// const reverse = document.querySelector('.reverse')
+// const seek = document.querySelector('.seek')
 
-//timeline
+// //timeline
 
-const tl = gsap.timeline( {paused : true} )
+// const tl = gsap.timeline( {paused : true} )
 
-tl.to('.box1',{
-  // yPercent : 100,
-  x : 121,
-  // opacity: 0, 
-  duration : 1,
-  ease: 'power4.out',
-  // stagger : {
-  //   each : 0.08,
-  //   from : 'random'
-  // }
-}).to('.box2', {
-  x : 120,
-  duration : 2,
-  ease : "power4.out",
-  // delay : 1.9
-},"ferrari").to('.box3', {
-  x : 120,
-  duration : 2,
-  ease : "power4.out",
-  // delay : 1.9
-}).to('.box4', {
-  x : 120,
-  duration : 2,
-  ease : "power4.out",
-  // delay : 1.9
-},"ferrari+=0.2",).to('.box5', {
-  x : 120,
-  duration : 2,
-  ease : "power4.out",
-  // delay : 1.9
-})
+// tl.to('.box1',{
+//   // yPercent : 100,
+//   x : 121,
+//   // opacity: 0, 
+//   duration : 1,
+//   ease: 'power4.out',
+//   // stagger : {
+//   //   each : 0.08,
+//   //   from : 'random'
+//   // }
+// }).to('.box2', {
+//   x : 120,
+//   duration : 2,
+//   ease : "power4.out",
+//   // delay : 1.9
+// },"ferrari").to('.box3', {
+//   x : 120,
+//   duration : 2,
+//   ease : "power4.out",
+//   // delay : 1.9
+// }).to('.box4', {
+//   x : 120,
+//   duration : 2,
+//   ease : "power4.out",
+//   // delay : 1.9
+// },"ferrari+=0.2",).to('.box5', {
+//   x : 120,
+//   duration : 2,
+//   ease : "power4.out",
+//   // delay : 1.9
+// })
 
 
-play.addEventListener('click',()=>{
-  tl.play()
-})
-pause.addEventListener('click',()=>{
-  tl.pause()
-})
-restart.addEventListener('click',()=>{
-  tl.restart()
-})
-reverse.addEventListener('click',()=>{
-  tl.reverse() 
-})
-seek.addEventListener('click',()=>{
-  tl.seek(1.75)
-})
+// play.addEventListener('click',()=>{
+//   tl.play()
+// })
+// pause.addEventListener('click',()=>{
+//   tl.pause()
+// })
+// restart.addEventListener('click',()=>{
+//   tl.restart()
+// })
+// reverse.addEventListener('click',()=>{
+//   tl.reverse() 
+// })
+// seek.addEventListener('click',()=>{
+//   tl.seek(1.75)
+// })
+
+
+//loading timeline
+const loadingTimeline = () => {
+  return gsap.timeline().to(Element,{})
+}
+
+//navbar timeline
+const navbarTimeline = () => {
+  return gsap.timeline()
+}
+
+
+const master = gsap.timeline()
+master.add(loadingTimeline, "-=0.4").add(navbarTimeline)
