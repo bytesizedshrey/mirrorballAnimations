@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  background: #000;
+}
+
+.box1, .box2, .box3, .box4, .box5{
+  height: 170px;
+  width: 170px;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.box1{
+  background-color: blue;
+}
+.box2{
+  background-color: cadetblue;
+}
+.box3{
+  background-color: red;
+}
+.box4{
+  background-color: pink;
+}
+.box5{
+  background-color: plum;
+}
+button{
+  font-size: 5rem;
+}
+/* #app{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* h1{
+  font-size: 8rem;
+  line-height: 0.9;
+  font-family: sans-serif;
+  color: red;
+}
+
+span {
+  display: inline-block;
+}
+
+.heading{
+  overflow: hidden;
+} */
