@@ -12,9 +12,10 @@ gsap.to('.box',{
   yoyo : true,
   // delay : 1.9,
   scrollTrigger:{
-  trigger : '.box',
-  start : "top 30%",
-  end : "top 10%",
-  scrub : true
+  trigger : '.page2',
+  start : "top top",
+  end : "top -40%",
+  scrub : 4,
+  pin : true
   } 
 })
