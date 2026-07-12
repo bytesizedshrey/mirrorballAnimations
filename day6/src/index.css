@@ -14,9 +14,13 @@ body {
   background-color: black;
 }
 
-.box{
+.box,.box1{
   height: 300px;
   width: 300px;
   background: blue;
   border-radius: 20px;
+}
+
+.box1{
+  background: red;
 }
