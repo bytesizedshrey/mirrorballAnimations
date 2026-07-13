@@ -1,7 +1,11 @@
+import TextReveal from "@/components/TextReveal";
+
 export default function Home() {
   return(
-  <main className="h-[300vh] w-full">
-      <h1 className="text-[16rem]">hello</h1>
+  <main className="bg-black h-[300vh] w-full">
+     <TextReveal className='text-[3rem] text-white'>
+      Hello Monza
+     </TextReveal>
     </main>
   );
 }
