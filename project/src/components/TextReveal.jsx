@@ -10,7 +10,7 @@ const TextReveal = forwardRef(({
     trigger = 'mount',
     scrollStart = 'top 75%',
     splitBy = 'lines',
-    duration = 0.67,
+    duration = 1,
     stagger = '0.85',
     delay = 0,
     ease = 'power3.out',
@@ -20,7 +20,7 @@ const TextReveal = forwardRef(({
     const tlRef = useRef(null)
 
 
-    useImperativeHandle(ref, ()=> ({
+    useImperativeHandle(ref, () => ({
         play : () => tlRef.current?.play(),
         reverse: () => tlRef.current?.reverse(),
         reset : () => tlRef.current?.pause(0),
