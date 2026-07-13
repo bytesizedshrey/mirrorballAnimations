@@ -1,7 +1,7 @@
 "use client"
 import gsap from "gsap"
 import { ScrollTrigger,SplitText,useGSAP } from "@/libs/gsap"
-import { forwardRef, useRef } from "react"
+import { forwardRef, useImperativeHandle, useRef } from "react"
 
 
 const TextReveal = forwardRef(({
@@ -18,6 +18,14 @@ const TextReveal = forwardRef(({
     const wrapperRef = useRef(null)
     const splitRef = useRef(null)
     const tlRef = useRef(null)
+
+
+    useImperativeHandle(ref, ()=> ({
+        play : () => tlRef.current?.play(),
+        reverse: () => tlRef.current?.reverse(),
+        reset : () => tlRef.current?.pause(0),
+    }))
+
     //will get text splitted
     useGSAP(()=>{
         splitRef.current = new SplitText(wrapperRef.current,{
@@ -31,7 +39,8 @@ const TextReveal = forwardRef(({
         })
         //initialy it will be paused
         tlRef.current = gsap.timeline({
-            defaults: {delay, paused : true},
+            paused : true,
+            defaults: {delay}
         })
         //current state to final state of text(aka split text)
         tlRef.current.to(elements,{
@@ -49,7 +58,7 @@ const TextReveal = forwardRef(({
             tlRef.current.play()
         }
 
-        if(trigger === 'mount'){
+        if(trigger === 'scroll'){
             ScrollTrigger.create({
                 trigger : wrapperRef.current,
                 start : scrollStart,
