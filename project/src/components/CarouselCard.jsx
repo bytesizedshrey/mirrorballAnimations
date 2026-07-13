@@ -1,8 +1,9 @@
 import gsap from "gsap";
 import { useRef } from "react";
+import TextReveal from "./TextReveal";
 
-const CARD_WIDTH = 200;
-const CARD_HEIGHT = 280;
+const CARD_WIDTH = 300;
+const CARD_HEIGHT = 380;
 const SCALE = 1.35;
 
 const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {

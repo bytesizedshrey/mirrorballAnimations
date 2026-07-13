@@ -3,12 +3,12 @@ import CarouselCard from "./CarouselCard";
 import gsap from "@/libs/gsap";
 
 
-const CARD_WIDTH = 200;
-const CARD_HEIGHT = 280;
+const CARD_WIDTH = 300;
+const CARD_HEIGHT = 380;
 const SCALE = 1.35;
-const CARD_GAP = 1.35;
+const CARD_GAP = 200;
 
-const DURATION = 25;
+const DURATION = 16;
 
 const TRACK_H = CARD_HEIGHT * SCALE
 
@@ -32,12 +32,12 @@ const InfiniteCarousel = ({projects}) => {
     const doubled = [...projects, ...projects];
   return (
     <div style={{
-        padding : `${TRACK_H * 0.2}px 0 24px`
+        padding : `${TRACK_H * 1.2}px 0 24px`
     }} className="overflow-hidden">
         <div ref={trackRef} style={{gap: `${CARD_GAP}px `,width: 'max-content', height: `${TRACK_H}px`}} className="track flex items-center">
-            {doubled.map((project,i)=>{
+            {doubled.map((project,i)=>(
                 <CarouselCard key={i} project={project} onHoverStart={()=>tweenRef.current?.pause()} onHoverEnd={()=>tweenRef.current?.play()}/>
-            })}
+            ))}
         </div>
     </div>
   )
