@@ -3,8 +3,9 @@ import gsap, { ScrollTrigger } from "@/libs/gsap";
 import { useGSAP } from "@/libs/gsap";
 import TextReveal from "./TextReveal";
 import { useRef } from "react";
+import useViewTransition from "@/hooks/useViewTransition";
 
-const ProjectPage = ({ project }) => {
+const ProjectPage = ({ project, nextProject }) => {
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   useGSAP(
@@ -52,6 +53,10 @@ const ProjectPage = ({ project }) => {
         <h1 className="text-2xl">Project not found</h1>
       </div>
     );
+  }
+  const {navigateTo}=useViewTransition()
+  const handleClick = () => {
+    navigateTo(`/project/${nextProject.slug}`)
   }
 
   return (
@@ -113,7 +118,10 @@ const ProjectPage = ({ project }) => {
             </div>
           </section>
         ))}
-        <footer className="h-screen w-full"></footer>
+        <footer className="h-screen flex items-center justify-center w-full">
+            <h1>Next Project</h1>
+            <h1 onClick={handleClick}>{nextProject.title}</h1>
+        </footer>
       </main>
     </>
   );
