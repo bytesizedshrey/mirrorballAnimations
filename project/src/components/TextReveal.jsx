@@ -6,7 +6,7 @@ import { forwardRef, useImperativeHandle, useRef } from "react"
 
 const TextReveal = forwardRef(({
     children,
-    className = '',
+    className = 'inline-block',
     trigger = 'mount',
     scrollStart = 'top 75%',
     splitBy = 'lines',
@@ -77,7 +77,7 @@ const TextReveal = forwardRef(({
         dependencies : [splitBy,trigger,stagger,duration]
     })
     return (
-      <div ref={wrapperRef} className={`overflow-hidden ${className}`}>{children}</div>
+      <div ref={wrapperRef} className={`overflow-hidden inline-block ${className}`}>{children}</div>
     )
   })
 

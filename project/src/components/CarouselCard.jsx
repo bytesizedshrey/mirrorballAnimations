@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { useRef } from "react";
 import TextReveal from "./TextReveal";
+import useViewTransition from "@/hooks/useViewTransition";
 
 const CARD_WIDTH = 400;
 const CARD_HEIGHT = 520;
@@ -19,14 +20,14 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
     gsap.to(cardRef.current,{
         width : CARD_WIDTH * SCALE, 
         height : CARD_HEIGHT * SCALE,
-        duration : 0.45,
+        duration : 0.35,
         ease : 'power3.out'
     })
 
     gsap.to(imgRef.current,{
-        scale : 1.4,
-        duration: 0.47,
-        ease: 'expo.out'
+        scale : 1,
+        duration: 0.37,
+        ease: 'power3.out'
     })
 
     numberRef.current?.play()
@@ -40,14 +41,14 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
     gsap.to(cardRef.current,{
         width : CARD_WIDTH, 
         height : CARD_HEIGHT,
-        duration : 0.24,
+        duration : 0.14,
         ease : 'power3.out'
     })
 
     gsap.to(imgRef.current,{
-        scale : 1,
-        duration: 0.47,
-        ease: 'expo.out'
+        scale : 1.6,
+        duration: 0.17,
+        ease: 'power3.out'
     })
 
 
@@ -55,9 +56,16 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
     titleRef.current?.reverse()
   }
 
+  const {navigateTo} = useViewTransition()
+
+  const handleClick = ()=>{
+    navigateTo(`/project/${project.slug}`)
+  }
+
   return (
     <div
       ref={cardRef}
+      onClick={handleClick}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       style={{
@@ -75,18 +83,18 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
         className="titlePanel absolute left-0 pointer-events-none flex flex-col gap-[0.8rem]"
       >
         <TextReveal ref={numberRef} duration='0.25' trigger="manual" splitBy="chars">
-          <h3 className="text-[1.5rem] text-[#010101]">{project.number}</h3>
+          <h3 className="text-[1.2rem] text-[#010101]">{project.number}</h3>
         </TextReveal>
 
         <TextReveal ref={titleRef} duration='0.25' trigger="manual" splitBy="words">
-          <h3 className="text-[1.5rem] text-[#010101]">{project.title}</h3>
+          <h3 className="text-[1.2rem] text-[#010101]">{project.title}</h3>
         </TextReveal>
       </div>
 
       <div className="imageDiv absolute h-full w-full overflow-hidden">
         <img
           style={{ transformOrigin: "center center", userSelect: "none" }}
-          className="h-full w-full object-cover"
+          className="h-full scale-[1.6] w-full object-cover"
           ref={imgRef}
           src={project.coverImage}
           alt={project.title}

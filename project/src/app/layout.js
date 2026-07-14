@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 import SmoothScroller from "@/components/SmoothScroller";
 import { Major_Mono_Display, Exo_2 } from "next/font/google";
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       className={`h-full antialiased ${majorMono.variable} ${exo2.variable}`}
     >
       <body className="min-h-full flex flex-col">
+      <Navbar/>
         <SmoothScroller>
           {children}
         </SmoothScroller>
