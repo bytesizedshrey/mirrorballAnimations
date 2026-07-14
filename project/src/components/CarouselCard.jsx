@@ -2,8 +2,8 @@ import gsap from "gsap";
 import { useRef } from "react";
 import TextReveal from "./TextReveal";
 
-const CARD_WIDTH = 300;
-const CARD_HEIGHT = 380;
+const CARD_WIDTH = 400;
+const CARD_HEIGHT = 520;
 const SCALE = 1.35;
 
 const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
@@ -66,7 +66,7 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
           <h3 className="text-[1rem] text-[#010101]">{project.number}</h3>
         </TextReveal>
 
-        <TextReveal ref={numberRef} trigger="manual" splitBy="words">
+        <TextReveal ref={titleRef} trigger="manual" splitBy="words">
           <h3 className="text-[1rem] text-[#010101]">{project.title}</h3>
         </TextReveal>
       </div>
