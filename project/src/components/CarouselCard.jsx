@@ -59,15 +59,15 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
       className="relative"
     >
       <div
-        style={{ bottom: "calc(100% + 3rem)" }}
-        className="titlePanel absolute left-0 pointer-events-none flex flex-col gap-[1rem]"
+        style={{ bottom: "calc(100% + 1.5rem)" }}
+        className="titlePanel absolute left-0 pointer-events-none flex flex-col gap-[0.8rem]"
       >
         <TextReveal ref={numberRef} trigger="manual" splitBy="chars">
-          <h3 className="text-[1rem] text-[#010101]">{project.number}</h3>
+          <h3 className="text-[1.5rem] text-[#010101]">{project.number}</h3>
         </TextReveal>
 
         <TextReveal ref={titleRef} trigger="manual" splitBy="words">
-          <h3 className="text-[1rem] text-[#010101]">{project.title}</h3>
+          <h3 className="text-[1.5rem] text-[#010101]">{project.title}</h3>
         </TextReveal>
       </div>
 

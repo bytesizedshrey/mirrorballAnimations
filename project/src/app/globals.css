@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+h1, span, h3 {
+  font-family: var(--font-major-mono), monospace;
+}
+
+h2, p, h4 {
+  font-family: var(--font-exo2), sans-serif;
+}
