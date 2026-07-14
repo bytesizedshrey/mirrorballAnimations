@@ -16,12 +16,17 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
   const onEnter = ()=>{
     onHoverStart?.()
 
-
-    gsap.to(imgRef.current,{
+    gsap.to(cardRef.current,{
         width : CARD_WIDTH * SCALE, 
         height : CARD_HEIGHT * SCALE,
         duration : 0.45,
         ease : 'power3.out'
+    })
+
+    gsap.to(imgRef.current,{
+        scale : 1.4,
+        duration: 0.47,
+        ease: 'expo.out'
     })
 
     numberRef.current?.play()
@@ -32,12 +37,19 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
   const onLeave = ()=>{
     onHoverEnd?.()
 
-    gsap.to(imgRef.current,{
+    gsap.to(cardRef.current,{
         width : CARD_WIDTH, 
         height : CARD_HEIGHT,
         duration : 0.24,
         ease : 'power3.out'
     })
+
+    gsap.to(imgRef.current,{
+        scale : 1,
+        duration: 0.47,
+        ease: 'expo.out'
+    })
+
 
     numberRef.current?.reverse()
     titleRef.current?.reverse()
@@ -62,11 +74,11 @@ const CarouselCard = ({ project, onHoverStart, onHoverEnd }) => {
         style={{ bottom: "calc(100% + 1.5rem)" }}
         className="titlePanel absolute left-0 pointer-events-none flex flex-col gap-[0.8rem]"
       >
-        <TextReveal ref={numberRef} trigger="manual" splitBy="chars">
+        <TextReveal ref={numberRef} duration='0.25' trigger="manual" splitBy="chars">
           <h3 className="text-[1.5rem] text-[#010101]">{project.number}</h3>
         </TextReveal>
 
-        <TextReveal ref={titleRef} trigger="manual" splitBy="words">
+        <TextReveal ref={titleRef} duration='0.25' trigger="manual" splitBy="words">
           <h3 className="text-[1.5rem] text-[#010101]">{project.title}</h3>
         </TextReveal>
       </div>
