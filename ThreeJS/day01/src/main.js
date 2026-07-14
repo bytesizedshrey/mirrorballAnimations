@@ -36,6 +36,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 
 const controls = new OrbitControls( camera, renderer.domElement );
+controls.enableDamping = true 
 
 
 //aspect ratio
