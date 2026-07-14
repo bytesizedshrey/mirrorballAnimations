@@ -67,7 +67,7 @@ const useViewTransition = () => {
         ease: "power3.inOut",
         stagger:{
             each : 0.06,
-            from : 'center'
+            from : 'random'
         },
         onComplete: () => {
           // Navigate once the screen is fully covered
@@ -81,7 +81,7 @@ const useViewTransition = () => {
             delay: 0.12,
             stagger:{
                 each : 0.06,
-                from : 'center'
+                from : 'random'
             },
             transformOrigin: "top",
             onComplete: removeOverlay,
