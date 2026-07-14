@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 //Scene
 const scene = new THREE.Scene()
@@ -23,18 +24,33 @@ const material = new THREE.MeshBasicMaterial({
 
 //actor
 const cube = new THREE.Mesh(geometry,material)
-cube.rotation.y = 1.1
-cube.rotation.x = 1.1
+// cube.rotation.y = 1.1
+// cube.rotation.x = 1.1
 scene.add(cube)
 //canvas(parda)
 const canvas = document.querySelector("canvas")
+
 //renderer : which canvas needs to be projected
 const renderer = new THREE.WebGLRenderer({
   canvas,
 })
 
+const controls = new OrbitControls( camera, renderer.domElement );
+
+
 //aspect ratio
 renderer.setSize(window.innerWidth,window.innerHeight)
 
-//on
-renderer.render(scene,camera)
+const animate = () => {
+  cube.rotation.y += 0.1;
+
+  controls.update();
+
+  //on
+  renderer.render(scene,camera)
+
+  //depends on fps
+  requestAnimationFrame(animate);
+}
+
+animate()
