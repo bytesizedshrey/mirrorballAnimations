@@ -113,7 +113,7 @@ const ProjectPage = ({ project }) => {
             </div>
           </section>
         ))}
-        <footer></footer>
+        <footer className="h-screen w-full"></footer>
       </main>
     </>
   );
