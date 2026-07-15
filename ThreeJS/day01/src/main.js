@@ -11,6 +11,24 @@ const size = {
 const scene = new THREE.Scene()
 const clock = new THREE.Clock()
 
+//texture loader
+
+const textureLoader = new THREE.TextureLoader()
+
+const texture = textureLoader.load('https://images.unsplash.com/photo-1531850959096-cfbb6f26c5a8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  ()=> {
+    console.log('texture is loaded')
+  },
+  ()=>{
+    console.log('texture is loading')
+  },
+  ()=>{
+    console.log('error')
+  }
+)
+
+const texture2 = textureLoader.load('https://images.unsplash.com/photo-1593544340816-93d84a106415?q=80&w=2390&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+
 //Camera
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -22,18 +40,31 @@ const camera = new THREE.PerspectiveCamera(
 //camera position
 camera.position.z = 5;
 
+//lights
+const ambientLight = new THREE.AmbientLight('#ffffff',0.2)
+scene.add(ambientLight)
+
 //mesh
-const geometry = new THREE.BoxGeometry(1,1,1)//width , height , depth
-const material = new THREE.MeshBasicMaterial({
-  color: 'red',
+// const geometry = new THREE.BoxGeometry(1,1,1)//width , height , depth
+const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8, 1 );
+
+// const material = new THREE.MeshBasicMaterial({
+// color : 'red'
+// })
+
+const material = new THREE.MeshStandardMaterial({
+  color: 'red'
 })
 
 //actor
 const cube = new THREE.Mesh(geometry,material)
+// cube.rotation.x = Math.PI / 3
+// cube.scale.set(1,2,3)//xyz
+// cube.position.set(1.5,-2,-2.4)
 // cube.rotation.y = 1.1
 // cube.rotation.x = 1.1
 scene.add(cube)
-//canvas(parda)
+//canvas(parda) 
 const canvas = document.querySelector("canvas")
 
 //renderer : which canvas needs to be projected
@@ -64,7 +95,7 @@ window.addEventListener('resize',()=>{
 const animate = () => {
   const delta = clock.getElapsedTime()
 
-  cube.rotation.y = delta;
+  // cube.rotation.y = delta;
 
   controls.update();
 
