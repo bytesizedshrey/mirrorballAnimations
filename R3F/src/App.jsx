@@ -1,5 +1,4 @@
-import { Canvas } from "@react-three/fiber";
-import React from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import Experience from "./components/Experience";
 import { OrbitControls } from "@react-three/drei";
 
