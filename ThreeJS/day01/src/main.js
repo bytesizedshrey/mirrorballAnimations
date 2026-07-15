@@ -41,8 +41,18 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.z = 5;
 
 //lights
-const ambientLight = new THREE.AmbientLight('#ffffff',0.2)
+const ambientLight = new THREE.AmbientLight('#ffffff',1.2)
 scene.add(ambientLight)
+
+//directional light
+const directionalLight = new THREE.DirectionalLight("#ffffff",3)
+
+directionalLight.position.set(1,1,1)
+
+scene.add(directionalLight)
+
+const DirectionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+scene.add(DirectionalLightHelper)
 
 //mesh
 // const geometry = new THREE.BoxGeometry(1,1,1)//width , height , depth
