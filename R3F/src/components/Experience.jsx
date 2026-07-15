@@ -13,18 +13,69 @@ const Experience = () => {
       if (scene) {
         const wheels = []
         scene.traverse((child) => {
-          if (child.isMesh || child.isGroup) {
-            // Find all wheel nodes
-            if (child.name.startsWith('wheel_')) {
-              wheels.push(child)
+          // Adjust materials to make the car look hyper-realistic, metallic, and polished
+          if (child.isMesh) {
+            const material = child.material
+            if (material) {
+              const name = material.name.toLowerCase()
+
+              if (name.includes('body_color') || name.includes('dodgerblue') || name.includes('yellow')) {
+                // Highly reflective metallic car paint
+                material.metalness = 0.95
+                material.roughness = 0.08
+                if (material.clearcoat !== undefined) {
+                  material.clearcoat = 1.0
+                  material.clearcoatRoughness = 0.03
+                }
+              } else if (name.includes('chrome')) {
+                // Polished mirror-like chrome
+                material.metalness = 1.0
+                material.roughness = 0.03
+              } else if (name.includes('metal')) {
+                // Standard structural metals (brakes, rims, etc.)
+                material.metalness = 0.9
+                material.roughness = 0.15
+              } else if (name.includes('tires')) {
+                // Matte rubber tires
+                material.metalness = 0.0
+                material.roughness = 0.8
+              } else if (name.includes('leather')) {
+                // Soft leather interior
+                material.metalness = 0.0
+                material.roughness = 0.65
+              } else if (name.includes('glass')) {
+                // Transparent, reflective glass
+                material.metalness = 0.1
+                material.roughness = 0.01
+                material.transparent = true
+                material.opacity = 0.3
+              } else if (name.includes('plastic')) {
+                // Satin trim plastics
+                material.metalness = 0.1
+                material.roughness = 0.5
+              }
             }
-            // Find steering wheel node
-            if (child.name === 'steering_wheel') {
-              steeringRef.current = child
-            }
+          }
+
+          // Find the 4 main wheel groups (wheel_rr, wheel_rl, wheel_fl, wheel_fr)
+          if (child.name.startsWith('wheel_')) {
+            // Gather all components of the wheel (rim, tire, nuts, etc.) except the stationary brake caliper
+            child.children.forEach((subChild) => {
+              if (subChild.name !== 'brake') {
+                wheels.push(subChild)
+              }
+            })
+          }
+          // Find steering wheel node
+          if (child.name === 'steering_wheel') {
+            steeringRef.current = child
           }
         })
         wheelsRef.current = wheels
+        console.log("Experience loaded - Wheels found:", wheels.map(w => `${w.parent.name} -> ${w.name}`))
+        if (steeringRef.current) {
+          console.log("Experience loaded - Steering wheel found:", steeringRef.current.name)
+        }
       }
     }, [scene])
 
@@ -39,9 +90,9 @@ const Experience = () => {
         carRef.current.position.y = Math.sin(time * 1.5) * 0.05
       }
 
-      // Rotate wheels to simulate driving
-      wheelsRef.current.forEach((wheel) => {
-        wheel.rotation.x += delta * 4
+      // Rotate wheels to simulate driving (spinning only the tire/rim components, leaving brake calipers stationary)
+      wheelsRef.current.forEach((wheelComponent) => {
+        wheelComponent.rotation.x += delta * 6
       })
 
       // Turn the steering wheel left and right
