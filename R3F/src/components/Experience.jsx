@@ -1,39 +1,77 @@
-import { useTexture } from '@react-three/drei'
-import { useFrame, useLoader } from '@react-three/fiber'
-import React, { useRef } from 'react'
-import * as THREE from 'three'
+import { useGLTF, Environment, ContactShadows } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
+import React, { useRef, useEffect } from 'react'
 
 const Experience = () => {
-    const cubeRef = useRef(null)
-    useFrame((state,delta)=>{
-      cubeRef.current.rotation.y += delta
-    })
-    const {texture,texture2} = useTexture({
-        texture : "https://images.unsplash.com/photo-1635805737707-575885ab0820?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-         texture2 : "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    const carRef = useRef()
+    const wheelsRef = useRef([])
+    const steeringRef = useRef()
+
+    const { scene } = useGLTF('./ferrari.glb')
+
+    useEffect(() => {
+      if (scene) {
+        const wheels = []
+        scene.traverse((child) => {
+          if (child.isMesh || child.isGroup) {
+            // Find all wheel nodes
+            if (child.name.startsWith('wheel_')) {
+              wheels.push(child)
+            }
+            // Find steering wheel node
+            if (child.name === 'steering_wheel') {
+              steeringRef.current = child
+            }
+          }
+        })
+        wheelsRef.current = wheels
+      }
+    }, [scene])
+
+    useFrame((state, delta) => {
+      const time = state.clock.getElapsedTime()
+      
+      // Rotate the entire car slowly for a showcase effect
+      if (carRef.current) {
+        carRef.current.rotation.y += delta * 0.15
+        
+        // Subtle floating animation to simulate active suspension
+        carRef.current.position.y = Math.sin(time * 1.5) * 0.05
+      }
+
+      // Rotate wheels to simulate driving
+      wheelsRef.current.forEach((wheel) => {
+        wheel.rotation.x += delta * 4
+      })
+
+      // Turn the steering wheel left and right
+      if (steeringRef.current) {
+        // Adjust the rotation axis depending on model setup, local y is common
+        steeringRef.current.rotation.y = Math.sin(time * 2) * 0.5
+      }
     })
     
-    // const texture = useLoader(THREE.TextureLoader,"https://images.unsplash.com/photo-1587204714992-2c93329aaa3a?q=80&w=969&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
   return (
     <>
-    {/* <group position={[0,2,0]}>
-    <mesh position={[2,0,0]}>
-        <boxGeometry />
-        {/* <torusGeometry args={[1, 5, 32 ]} /> */}
-        {/* <meshBasicMaterial color={'blue'}/>
-      </mesh> */}
+      {/* Premium studio environment lighting & reflections */}
+      <Environment preset="city" />
+      
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 15, 5]} intensity={1.5} />
+      <directionalLight position={[-5, 15, -5]} intensity={0.5} />
 
-      {/* <mesh position={[-2,0,0]}>
-        <boxGeometry/> */}
-        {/* <torusGeometry args={[1, 5, 32 ]} /> */}
-        {/* <meshBasicMaterial color={'red'}/>
-      </mesh>
-    </group> */} */
-    <mesh ref={cubeRef}>
-        <boxGeometry />
-        {/* <torusGeometry args={[1, 5, 32 ]} /> */}
-        <meshBasicMaterial map={texture2}/>
-      </mesh>
+      <group ref={carRef}>
+        <primitive object={scene} />
+      </group>
+
+      {/* Realistic floor shadow beneath the car */}
+      <ContactShadows 
+        position={[0, -0.01, 0]} 
+        opacity={0.8} 
+        scale={12} 
+        blur={2.5} 
+        far={2} 
+      />
     </>
   )
 }
