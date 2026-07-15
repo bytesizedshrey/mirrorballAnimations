@@ -54,6 +54,17 @@ scene.add(directionalLight)
 const DirectionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
 scene.add(DirectionalLightHelper)
 
+const pointLight = new THREE.PointLight('#ffffff',2,1.2,1)
+
+pointLight.position.set(0,2,0)
+
+scene.add(pointLight)
+
+const pointLightHelper = new THREE.PointLightHelper(pointLight)
+
+scene.add(pointLightHelper)
+
+
 //mesh
 // const geometry = new THREE.BoxGeometry(1,1,1)//width , height , depth
 const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8, 1 );
