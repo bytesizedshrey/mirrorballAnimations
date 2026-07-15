@@ -125,12 +125,34 @@ const material = new THREE.MeshStandardMaterial({
 
 //actor
 const cube = new THREE.Mesh(geometry,material)
+
+const raycaster = new THREE.Raycaster()
+
+const mouse = new THREE.Vector2()
+
+window.addEventListener('mousemove',(e)=>{
+  mouse.x = (e.clientX/window.innerWidth) * 2 - 1,
+  mouse.y = -(e.clientY/window.innerHeight) * 2 + 1
+
+  // console.log(mouse.x,mouse.y)
+})
+
 // cube.rotation.x = Math.PI / 3
 // cube.scale.set(1,2,3)//xyz
 // cube.position.set(1.5,-2,-2.4)
 // cube.rotation.y = 1.1
 // cube.rotation.x = 1.1
 scene.add(cube)
+
+window.addEventListener("click",()=>{
+  raycaster.setFromCamera(mouse,camera)
+
+  const intersect = raycaster.intersectObject(cube)
+
+  if(intersect.length > 0){
+    cube.material.color.set("blue")
+  }
+})
 //canvas(parda) 
 const canvas = document.querySelector("canvas")
 
