@@ -5,7 +5,7 @@ import ImagePlane from "./ImagePlane";
 
 
 const FanGroup = () => {
-  const { numPlanes, spreadAngle, planeWidth, planeHeight } = useControls("Book Fan Controls", {
+  const { numPlanes, spreadAngle, planeWidth, planeHeight, positionY } = useControls("Book Fan Controls", {
     numPlanes: {
       value: 6,
       min: 2,
@@ -44,7 +44,7 @@ const FanGroup = () => {
   });
   const planes = useMemo(()=>{
     const count = numPlanes
-    const totalArcRad = (spreadAngle / Math.pi) / 180
+    const totalArcRad = (spreadAngle * Math.PI) / 180
     const step = totalArcRad / (count - 1)
     const startingAngle = - totalArcRad / 2
 
@@ -58,7 +58,7 @@ const FanGroup = () => {
         }
     })
   },[numPlanes, spreadAngle])
-  return <group>
+  return <group position={[0, positionY, 0]}>
     {planes.map((plane)=>(<ImagePlane key={plane.key} url={plane.url} position={plane.position} rotation={plane.rotation} planeWidth={planeWidth} planeHeight={planeHeight}/>))}
   </group>
 };

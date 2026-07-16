@@ -2,9 +2,8 @@ import { useTexture } from '@react-three/drei'
 import React, { useMemo } from 'react'
 import * as THREE from 'three'
 
-const texture = useTexture(url)
-
 const ImagePlane = ({url,position,rotation,planeWidth,planeHeight}) => {
+    const texture = useTexture(url)
     //only changes when dependencies does
     const geometry = useMemo(()=>{
         //to change default origin 
