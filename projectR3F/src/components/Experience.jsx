@@ -1,5 +1,6 @@
 import { useControls } from 'leva'
 import React from 'react'
+import FanGroup from './FanGroup'
 
 const Experience = () => {
    const {x,y} = useControls("Box Position",{
@@ -8,10 +9,11 @@ const Experience = () => {
     })
   return (
    <>
-   <mesh position={[x,y,0]}>
+    <FanGroup/>
+   {/* <mesh position={[x,y,0]}>
     <boxGeometry/>
     <meshBasicMaterial color={'blue'}/>
-   </mesh>
+   </mesh> */}
    </>
   )
 }
