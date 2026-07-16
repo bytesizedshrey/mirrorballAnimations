@@ -1,8 +1,14 @@
 import React from 'react'
+import Experience from './components/Experience'
+import { Canvas } from '@react-three/fiber'
 
 const App = () => {
   return (
-    <div>App</div>
+    <div className='parent'>
+      <Canvas>
+        <Experience/>
+      </Canvas>
+    </div>
   )
 }
 
