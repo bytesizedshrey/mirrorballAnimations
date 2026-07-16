@@ -1,11 +1,12 @@
 import { useControls } from "leva";
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { images } from "../Data/Images";
 import ImagePlane from "./ImagePlane";
+import { useFrame } from "@react-three/fiber";
 
 
 const FanGroup = () => {
-  const { numPlanes, spreadAngle, planeWidth, planeHeight, positionY } = useControls("Book Fan Controls", {
+  const { numPlanes, spreadAngle, planeWidth, planeHeight, positionY,rotationYspeed } = useControls("Book Fan Controls", {
     numPlanes: {
       value: 6,
       min: 2,
@@ -41,6 +42,13 @@ const FanGroup = () => {
         step: 0.05,
         label: "Y Position",
       },
+      rotationYspeed:{
+        value : 0.5,
+        min : -2,
+        max : 2,
+        step : 0.05,
+        label : "Rotation Speed"
+      }
   });
   const planes = useMemo(()=>{
     const count = numPlanes
@@ -58,7 +66,14 @@ const FanGroup = () => {
         }
     })
   },[numPlanes, spreadAngle])
-  return <group position={[0, positionY, 0]}>
+
+  const groupRef = useRef()
+
+  useFrame((state,delta)=>{
+    groupRef.current.rotation.y += delta * rotationYspeed
+  })
+
+  return <group ref={groupRef} position={[0, positionY, 0]}>
     {planes.map((plane)=>(<ImagePlane key={plane.key} url={plane.url} position={plane.position} rotation={plane.rotation} planeWidth={planeWidth} planeHeight={planeHeight}/>))}
   </group>
 };
